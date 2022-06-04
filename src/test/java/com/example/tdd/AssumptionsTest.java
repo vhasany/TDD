@@ -6,7 +6,6 @@ import com.example.tdd.environment.TestEnvironment;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.*;
 
 @DisplayName("assumption test")
@@ -23,7 +22,6 @@ public class AssumptionsTest {
   void setUp() {
     assumeTrue(testEnvironment.isFedora(), "invalid assumption Linux OS");
     assumeFalse(testEnvironment.isWindows(), "invalid assumption Linux OS system under Windows OS");
-
   }
 
   @Test
@@ -36,12 +34,12 @@ public class AssumptionsTest {
 
   @DisplayName("check system has job to run")
   @RepeatedTest(value = 5, name = "repeatedTestName")
-  void testJobToRun(TestReporter testReporter,RepetitionInfo repetitionInfo) {
+  void testJobToRun(TestReporter testReporter, RepetitionInfo repetitionInfo) {
     assumeTrue(testEnvironment.isAmd64Architecture());
     systemUnderTest.run(new Job());
     assumeTrue(systemUnderTest.hasJobToRun(), "system has no job to run");
     testReporter.publishEntry("count {}", "Hello reporter!");
     testReporter.publishEntry(
-            "repetition : ", String.valueOf(repetitionInfo.getTotalRepetitions()));
+        "repetition : ", String.valueOf(repetitionInfo.getTotalRepetitions()));
   }
 }
